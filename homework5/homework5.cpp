@@ -6,6 +6,7 @@ using namespace std;
 
 int simple(int n);
 string to_base2(int n);
+string reverse(string str);
 int main()
 {
     int n = 1;
@@ -64,6 +65,7 @@ int main()
         }
         if (n == 4)
         {
+            int maxcount = 0;
             cout << "19" << endl;
             int amount, sum = 0;
             cin >> amount;
@@ -72,21 +74,36 @@ int main()
             for (int i = 0; i < amount; i++)
                 cin >> classmates[i];
             cout << endl;
+
             for (int i = 0; i < amount; i++)
                 sum = sum + classmates[i];
+            
             float end = sum / amount;
-            cout << end << endl;
+            cout << end << endl;1
+            for (int i = 0; i < amount; i++)
+            {
+                if (classmates[i] > end)
+                {
+                    maxcount++;
+                }
+            }
+            cout << endl << maxcount << endl;
+
             cout << "28" <<  endl;
 
             int num, sn = 0;
             cin >> num;
             cout << endl;
+            
             while(num)
             {
                 sn = sn + num % 10;
                 num /= 10;
             }
+
             cout << sn << endl;
+
+
         }
         if (n == 5)
         {
@@ -101,10 +118,10 @@ int main()
                 {
                     // Use std::stoi() to convert string to integer
                     int res = stoi(line);
-
+                    
                     
                     outf = to_base2(res);
-                    
+                    outf = reverse(outf);
 
                     std::ofstream out("D:\\file2\\t3.txt", std::ios::app); // поток для записи
                     if (out.is_open())
@@ -117,7 +134,8 @@ int main()
             in.close();     // закрываем файл
         }
     }
-    
+
+
     return 0;
 }
 
@@ -131,10 +149,24 @@ string to_base2(int n)
 {
     string base;
     
-    for (int i = n; i > 0; i--)
+    while (n)
     {
         base += to_string(n % 2);
         n /= 2;
+    }
+    return base;
+}
+string reverse(string str)
+{
+    string base;
+    int size = 0;
+    for (int i = 0; i < str.size(); i++)
+    {
+        size++;
+    }
+    for (int i = size; i >= 0; i--)
+    {
+        base += str[i];
     }
     return base;
 }
